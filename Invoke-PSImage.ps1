@@ -1,4 +1,4 @@
-﻿function Invoke-ExecImg
+﻿function Invoke-PSImage
 {
 <#
 .SYNOPSIS
@@ -34,8 +34,8 @@ You will need to host the image and insert the URL into the command.
 
 .EXAMPLE
 
-PS>Import-Module .\Invoke-ExecImg.ps1
-PS>Invoke-ExecImg -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-kiwi.png
+PS>Import-Module .\Invoke-PSImage.ps1
+PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-kiwi.png
    [Oneliner to execute from a file]
    
 #>
