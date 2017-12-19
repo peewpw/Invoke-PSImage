@@ -80,7 +80,7 @@ PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-ki
     # Read in the script
     if ( $WebScript ) {
         $R=Invoke-WebRequest $WebScript
-        $ScriptBlockString=$R.RawContent+";"
+        $ScriptBlockString=$R.Content+";"
     }
     else {
         $ScriptBlockString = [IO.File]::ReadAllText($Script)
